@@ -34,10 +34,10 @@ public final class cliente extends javax.swing.JFrame {
     
 public void Conectar() throws SQLException{
     try{ 
-            conexion=DriverManager.getConnection("jdbc:mysql://localhost/angeles","root","marko");                     
+            conexion=DriverManager.getConnection("jdbc:postgresql://localhost:5432/Hotel","postgres","marko");                     
             st=conexion.createStatement(); 
 
-            rs=st.executeQuery("Select * from cliente");             
+            rs=st.executeQuery("Select * from clientes");             
 
             rs.next(); 
 
@@ -47,11 +47,11 @@ public void Conectar() throws SQLException{
             this.jtf_apellido_materno.setText(rs.getString("apellido_materno"));
             this.jtf_telefono.setText(rs.getString("telefono"));
             
-            rs = st.executeQuery("select * from cliente");
+            rs = st.executeQuery("select * from clientes");
             jt_clientes.setModel(DbUtils.resultSetToTableModel(rs));
             
             
-            rs = st.executeQuery("select * from cliente");
+            rs = st.executeQuery("select * from clientes");
             while (rs.next())
             this.jcb_clientes.addItem(rs.getString("nombre"));
             
@@ -89,7 +89,7 @@ public void Conectar() throws SQLException{
            this.jtf_apellido_materno.setText(rs.getString("apellido_materno"));
            this.jtf_telefono.setText(rs.getString("telefono"));
            
-          rs = st.executeQuery("select * from cliente");
+          rs = st.executeQuery("select * from clientes");
         }        
     }catch(SQLException err) {             
         JOptionPane.showMessageDialog(null,"Error "+err.getMessage());         
@@ -108,7 +108,7 @@ public void Conectar() throws SQLException{
            this.jtf_apellido_materno.setText(rs.getString("apellido_materno"));
            this.jtf_telefono.setText(rs.getString("telefono"));
            
-            rs = st.executeQuery("select * from cliente");
+            rs = st.executeQuery("select * from clientes");
         }        
     }catch(SQLException err) {             
         JOptionPane.showMessageDialog(null,"Error "+err.getMessage());         
@@ -161,11 +161,11 @@ public void Conectar() throws SQLException{
             String apellido_materno=this.jtf_apellido_materno.getText();
             String telefono=this.jtf_telefono.getText();
             
-            st.executeUpdate("Insert into cliente (id_cliente,nombre,apellido_paterno,apellido_materno,telefono)"+" values ('"+ id_cliente +"','"+ nombre +"','"+apellido_paterno+"','"+apellido_materno+"','"+telefono+"');"); 
+            st.executeUpdate("Insert into clientes (id_cliente,nombre,apellido_paterno,apellido_materno,telefono)"+" values ('"+ id_cliente +"','"+ nombre +"','"+apellido_paterno+"','"+apellido_materno+"','"+telefono+"');"); 
             this.Conectar();
             this.primeroRegistro();
             
-             rs=st.executeQuery("Select * from cliente");
+             rs=st.executeQuery("Select * from clientes");
 
         } catch(SQLException err)         { 
             JOptionPane.showMessageDialog(null,"Error "+err.getMessage()); 
@@ -176,9 +176,9 @@ public void Conectar() throws SQLException{
     
      private void borrarRegistro(){
         try{ 
-           st.executeUpdate("delete from cliente where id_cliente="+this.jtf_id_cliente.getText());
+           st.executeUpdate("delete from clientes where id_cliente="+this.jtf_id_cliente.getText());
            
-           rs=st.executeQuery("Select * from cliente");
+           rs=st.executeQuery("Select * from clientes");
            this.primeroRegistro();
            this.Conectar();
        } catch(SQLException err){ 
@@ -261,10 +261,10 @@ public void Conectar() throws SQLException{
         private void Buscar(){
         try{
          
-            rs = st.executeQuery("select * from cliente where nombre like '%"+this.jtf_buscar_cliente.getText()+"%'");
+            rs = st.executeQuery("select * from clientes where nombre like '%"+this.jtf_buscar_cliente.getText()+"%'");
             jt_clientes.setModel(DbUtils.resultSetToTableModel(rs));
             
-            rs=st.executeQuery("Select * from cliente"); 
+            rs=st.executeQuery("Select * from clientes"); 
         
         } catch (SQLException err){
              
