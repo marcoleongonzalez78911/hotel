@@ -20,9 +20,9 @@ public class Conectar {
     }
       
     public String db = "angeles";
-    public String url = "jdbc:posgresql://localhost/" + db;
+    public String url = "jdbc:posgresql://localhost:5432/" + db;
     public String user = "postgres";
-    public String pass = "";
+    public String pass = "marko";
     
     public Conectar()
     {
